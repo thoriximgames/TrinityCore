@@ -23,3 +23,8 @@ nbproject/*
 cmake-build-*/
 .vs
 *.user
+
+# Local Server Environment
+mysql_data/
+MyMMOServer/bin/
+MyMMOServer/mysql/

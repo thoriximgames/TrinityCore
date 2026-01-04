@@ -18,6 +18,7 @@
 #include "SRP6.h"
 #include "CryptoRandom.h"
 #include "Util.h"
+#include "Log.h"
 #include <algorithm>
 #include <functional>
 
@@ -105,5 +106,15 @@ std::optional<SessionKey> SRP6::VerifyChallengeResponse(EphemeralKey const& A, S
     if (ourM == clientM)
         return K;
     else
+    {
+        TC_LOG_DEBUG("server.authserver", "SRP6 Check Failed!");
+        TC_LOG_DEBUG("server.authserver", "  A: {}", ByteArrayToHexStr(A));
+        TC_LOG_DEBUG("server.authserver", "  B: {}", ByteArrayToHexStr(B));
+        TC_LOG_DEBUG("server.authserver", "  u: {}", u.AsHexStr());
+        TC_LOG_DEBUG("server.authserver", "  S: {}", ByteArrayToHexStr(S));
+        TC_LOG_DEBUG("server.authserver", "  K: {}", ByteArrayToHexStr(K));
+        TC_LOG_DEBUG("server.authserver", "  M (Client): {}", ByteArrayToHexStr(clientM));
+        TC_LOG_DEBUG("server.authserver", "  M (Server): {}", ByteArrayToHexStr(ourM));
         return std::nullopt;
+    }
 }
