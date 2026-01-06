@@ -947,6 +947,9 @@ void WorldSession::ReadMovementInfo(WorldPacket &data, MovementInfo* mi)
     data >> mi->time;
     data >> mi->pos.PositionXYZOStream();
 
+    TC_LOG_DEBUG("movement.packets", "[MOVEMENT_TRACKER] ReadMovementInfo: Flags=0x{:08X} Flags2=0x{:04X} Time={} Pos=({:.2f},{:.2f},{:.2f})",
+        mi->flags, mi->flags2, mi->time, mi->pos.GetPositionX(), mi->pos.GetPositionY(), mi->pos.GetPositionZ());
+
     if (mi->HasMovementFlag(MOVEMENTFLAG_ONTRANSPORT))
     {
         data >> mi->transport.guid.ReadAsPacked();
@@ -1276,7 +1279,10 @@ void WorldSession::SetPlayer(Player* player)
 
     // set m_GUID that can be used while player loggined and later until m_playerRecentlyLogout not reset
     if (_player)
+    {
         m_GUIDLow = _player->GetGUID().GetCounter();
+        GetGameClient()->SetActivelyMovedUnit(_player);
+    }
 }
 
 void WorldSession::ProcessQueryCallbacks()

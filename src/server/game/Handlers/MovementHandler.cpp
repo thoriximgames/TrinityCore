@@ -269,11 +269,17 @@ void WorldSession::HandleMovementOpcodes(WorldPacket& recvPacket)
 {
     uint16 opcode = recvPacket.GetOpcode();
 
+    TC_LOG_ERROR("movement.packets", "[MOVEMENT_TRACKER] >>> RX OpCode: 0x{:04X} ({}) | Size: {} bytes",
+        opcode, opcode, recvPacket.size());
+
     ObjectGuid guid;
     recvPacket >> guid.ReadAsPacked();
 
+    TC_LOG_ERROR("movement.packets", "[MOVEMENT_TRACKER] Packet GUID: {}", guid.ToString());
+
     if (!IsRightUnitBeingMoved(guid))
     {
+        TC_LOG_ERROR("movement.packets", "[MOVEMENT_TRACKER] REJECTED: Wrong unit being moved (GUID: {})", guid.ToString());
         recvPacket.rfinish();                     // prevent warnings spam
         return;
     }
@@ -285,6 +291,7 @@ void WorldSession::HandleMovementOpcodes(WorldPacket& recvPacket)
     // ignore, waiting processing in WorldSession::HandleMoveWorldportAckOpcode and WorldSession::HandleMoveTeleportAck
     if (plrMover && plrMover->IsBeingTeleported())
     {
+        TC_LOG_ERROR("movement.packets", "[MOVEMENT_TRACKER] SKIPPED: Player is being teleported");
         recvPacket.rfinish();                     // prevent warnings spam
         return;
     }
@@ -295,13 +302,28 @@ void WorldSession::HandleMovementOpcodes(WorldPacket& recvPacket)
     movementInfo.guid = guid;
     ReadMovementInfo(recvPacket, &movementInfo);
 
+    TC_LOG_ERROR("movement.packets", "[MOVEMENT_TRACKER] Position: ({:.2f}, {:.2f}, {:.2f}) | Orientation: {:.2f}",
+        movementInfo.pos.GetPositionX(), movementInfo.pos.GetPositionY(),
+        movementInfo.pos.GetPositionZ(), movementInfo.pos.GetOrientation());
+    TC_LOG_ERROR("movement.packets", "[MOVEMENT_TRACKER] Flags: 0x{:08X} | FallTime: {} | Client Time: {}",
+        movementInfo.flags, movementInfo.fallTime, movementInfo.time);
+
     recvPacket.rfinish();                         // prevent warnings spam
 
     if (!movementInfo.pos.IsPositionValid())
+    {
+        TC_LOG_ERROR("movement.packets", "[MOVEMENT_TRACKER] REJECTED: Invalid position");
         return;
+    }
 
     if (!mover->movespline->Finalized())
+    {
+        TC_LOG_ERROR("movement.packets", "[MOVEMENT_TRACKER] SKIPPED: Movespline not finalized");
         return;
+    }
+
+    TC_LOG_ERROR("movement.packets", "[MOVEMENT_TRACKER] Processing movement for player: {}",
+        plrMover ? plrMover->GetName() : "Non-Player Entity");
 
     // stop some emotes at player move
     if (plrMover && (plrMover->GetEmoteState() != 0))
@@ -367,9 +389,14 @@ void WorldSession::HandleMovementOpcodes(WorldPacket& recvPacket)
     movementInfo.time = AdjustClientMovementTime(movementInfo.time);
     mover->m_movementInfo = movementInfo;
 
+    TC_LOG_ERROR("movement.packets", "[MOVEMENT_TRACKER] Updated internal movement info. Broadcasting to observers...");
+
     WorldPacket data(opcode, recvPacket.size());
     WriteMovementInfo(&data, &movementInfo);
     mover->SendMessageToSet(&data, _player);
+
+    TC_LOG_ERROR("movement.packets", "[MOVEMENT_TRACKER] <<< TX Broadcast sent to observers | OpCode: 0x{:04X} ({})",
+        opcode, opcode);
 
     // Some vehicles allow the passenger to turn by himself
     if (Vehicle* vehicle = mover->GetVehicle())
@@ -388,7 +415,12 @@ void WorldSession::HandleMovementOpcodes(WorldPacket& recvPacket)
         return;
     }
 
+    TC_LOG_ERROR("movement.packets", "[MOVEMENT_TRACKER] Updating world position to ({:.2f}, {:.2f}, {:.2f})",
+        movementInfo.pos.GetPositionX(), movementInfo.pos.GetPositionY(), movementInfo.pos.GetPositionZ());
+
     mover->UpdatePosition(movementInfo.pos);
+
+    TC_LOG_ERROR("movement.packets", "[MOVEMENT_TRACKER] Position update COMPLETE. Packet processing finished successfully.");
 
     if (plrMover)                                            // nothing is charmed, or player charmed
     {

@@ -1,0 +1,44 @@
+{
+    "templates": [
+        {
+            "entry": 0,
+            "name": "Christopher",
+            "subname": "",
+            "modelid1": 0,
+            "scale": 1.0,
+            "minLevel": 1,
+            "maxLevel": 1,
+            "faction": 35,
+            "minHealth": 100,
+            "maxHealth": 100,
+            "minMana": 0,
+            "maxMana": 0,
+            "speedWalk": 1.0,
+            "speedRun": 1.1399999856948853,
+            "aiName": "SmartAI",
+            "scriptName": "",
+            "npcFlag": 0,
+            "unitFlags": 0
+        },
+        {
+            "entry": 1,
+            "name": "Giant Cave Spider",
+            "subname": "Just a default Spooder",
+            "modelid1": 0,
+            "scale": 1.0,
+            "minLevel": 1,
+            "maxLevel": 10,
+            "faction": 35,
+            "minHealth": 100,
+            "maxHealth": 100,
+            "minMana": 0,
+            "maxMana": 0,
+            "speedWalk": 1.0,
+            "speedRun": 1.1399999856948853,
+            "aiName": "SmartAI",
+            "scriptName": "",
+            "npcFlag": 0,
+            "unitFlags": 0
+        }
+    ]
+}
