@@ -1,0 +1,41 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "ConnectionTester/1.0.0": {
+        "dependencies": {
+          "Google.FlatBuffers": "25.2.10"
+        },
+        "runtime": {
+          "ConnectionTester.dll": {}
+        }
+      },
+      "Google.FlatBuffers/25.2.10": {
+        "runtime": {
+          "lib/net8.0/Google.FlatBuffers.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "ConnectionTester/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Google.FlatBuffers/25.2.10": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-z3ykbSRsy6oqMzeZ84a+K8rnMJ/ysVikar8r2yUhHz0HSxIjBpj53mZvpu6LjLEm5fLLWQsCdelJwL1nu7lloA==",
+      "path": "google.flatbuffers/25.2.10",
+      "hashPath": "google.flatbuffers.25.2.10.nupkg.sha512"
+    }
+  }
+}

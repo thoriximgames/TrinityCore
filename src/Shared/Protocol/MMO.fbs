@@ -1,0 +1,141 @@
+namespace MMO.Protocol;
+
+enum EntityType : byte { Player, NPC, Object }
+
+struct Vec3 {
+  x:float;
+  y:float;
+  z:float;
+}
+
+// The Login Request from Client to Server
+table LoginRequest {
+  username:string;
+  client_version:string;
+  token:string; // For modern session-based auth
+}
+
+// The Login Response from Server to Client
+table LoginResponse {
+  success:bool;
+  error_message:string;
+  player_id:uint64;
+  spawn_pos:Vec3;
+}
+
+// Account Registration
+table RegisterRequest {
+  username:string;
+  email:string;
+  password_hash:string; // SHA256(salt + password) computed by client
+}
+
+table RegisterResponse {
+  success:bool;
+  error_message:string;
+}
+
+// Realm Selection
+table RealmInfo {
+  id:uint32;
+  name:string;
+  population:float; // 0.0 to 1.0
+  status:byte; // 0 = Offline, 1 = Online
+}
+
+table RealmListRequest {
+}
+
+table RealmListResponse {
+  realms:[RealmInfo];
+}
+
+table JoinRealmRequest {
+  realm_id:uint32;
+}
+
+table JoinRealmResponse {
+  success:bool;
+  error_message:string;
+}
+
+// Character System
+table CharacterInfo {
+  id:uint64;
+  name:string;
+  race:byte;
+  character_class:byte;
+  level:uint32;
+}
+
+table CharacterListRequest {
+}
+
+table CharacterListResponse {
+  characters:[CharacterInfo];
+}
+
+table CreateCharacterRequest {
+  name:string;
+  race:byte;
+  character_class:byte;
+}
+
+table CreateCharacterResponse {
+  success:bool;
+  error_message:string;
+}
+
+table SelectCharacterRequest {
+  character_id:uint64;
+}
+
+table SelectCharacterResponse {
+  success:bool;
+  error_message:string;
+}
+
+table DeleteCharacterRequest {
+  character_id:uint64;
+  name_confirmation:string;
+}
+
+table DeleteCharacterResponse {
+  success:bool;
+  error_message:string;
+}
+
+// Basic Movement Packet
+table MovementUpdate {
+  entity_id:uint64;
+  position:Vec3;
+  rotation:float;
+  timestamp:uint64;
+}
+
+// Root Packet: Every message on the wire will be one of these
+union PacketType { 
+  LoginRequest, 
+  LoginResponse, 
+  MovementUpdate,
+  RegisterRequest,
+  RegisterResponse,
+  RealmListRequest,
+  RealmListResponse,
+  JoinRealmRequest,
+  JoinRealmResponse,
+  CharacterListRequest,
+  CharacterListResponse,
+  CreateCharacterRequest,
+  CreateCharacterResponse,
+  SelectCharacterRequest,
+  SelectCharacterResponse,
+  DeleteCharacterRequest,
+  DeleteCharacterResponse
+}
+
+table MasterPacket {
+  data:PacketType;
+}
+
+root_type MasterPacket;

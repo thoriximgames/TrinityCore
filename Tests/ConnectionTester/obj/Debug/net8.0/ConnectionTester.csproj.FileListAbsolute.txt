@@ -1,0 +1,17 @@
+E:\GIT\MMO-Suite\MMO-Server\Tests\ConnectionTester\obj\Debug\net8.0\ConnectionTester.csproj.AssemblyReference.cache
+E:\GIT\MMO-Suite\MMO-Server\Tests\ConnectionTester\obj\Debug\net8.0\ConnectionTester.GeneratedMSBuildEditorConfig.editorconfig
+E:\GIT\MMO-Suite\MMO-Server\Tests\ConnectionTester\obj\Debug\net8.0\ConnectionTester.AssemblyInfoInputs.cache
+E:\GIT\MMO-Suite\MMO-Server\Tests\ConnectionTester\obj\Debug\net8.0\ConnectionTester.AssemblyInfo.cs
+E:\GIT\MMO-Suite\MMO-Server\Tests\ConnectionTester\obj\Debug\net8.0\ConnectionTester.csproj.CoreCompileInputs.cache
+E:\GIT\MMO-Suite\MMO-Server\Tests\ConnectionTester\bin\Debug\net8.0\ConnectionTester.exe
+E:\GIT\MMO-Suite\MMO-Server\Tests\ConnectionTester\bin\Debug\net8.0\ConnectionTester.deps.json
+E:\GIT\MMO-Suite\MMO-Server\Tests\ConnectionTester\bin\Debug\net8.0\ConnectionTester.runtimeconfig.json
+E:\GIT\MMO-Suite\MMO-Server\Tests\ConnectionTester\bin\Debug\net8.0\ConnectionTester.dll
+E:\GIT\MMO-Suite\MMO-Server\Tests\ConnectionTester\bin\Debug\net8.0\ConnectionTester.pdb
+E:\GIT\MMO-Suite\MMO-Server\Tests\ConnectionTester\bin\Debug\net8.0\Google.FlatBuffers.dll
+E:\GIT\MMO-Suite\MMO-Server\Tests\ConnectionTester\obj\Debug\net8.0\Connecti.CD2C4845.Up2Date
+E:\GIT\MMO-Suite\MMO-Server\Tests\ConnectionTester\obj\Debug\net8.0\ConnectionTester.dll
+E:\GIT\MMO-Suite\MMO-Server\Tests\ConnectionTester\obj\Debug\net8.0\refint\ConnectionTester.dll
+E:\GIT\MMO-Suite\MMO-Server\Tests\ConnectionTester\obj\Debug\net8.0\ConnectionTester.pdb
+E:\GIT\MMO-Suite\MMO-Server\Tests\ConnectionTester\obj\Debug\net8.0\ConnectionTester.genruntimeconfig.cache
+E:\GIT\MMO-Suite\MMO-Server\Tests\ConnectionTester\obj\Debug\net8.0\ref\ConnectionTester.dll

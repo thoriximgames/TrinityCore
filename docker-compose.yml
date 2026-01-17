@@ -1,0 +1,60 @@
+services:
+  db:
+    image: postgres:16
+    container_name: mmo-db
+    restart: always
+    environment:
+      POSTGRES_USER: mmo_admin
+      POSTGRES_PASSWORD: mmo_password
+      POSTGRES_DB: mmo_world
+    ports:
+      - "5433:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mmo_admin -d mmo_world"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - ./sql/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - mmo-db-data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7.2-alpine
+    container_name: mmo-redis
+    restart: always
+    command: redis-server --appendonly yes
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - mmo-redis-data:/data
+
+  server:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: mmo-instance
+    restart: always
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    ports:
+      - "8085:8085"
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: mmo_admin
+      DB_PASS: mmo_password
+      DB_NAME: mmo_world
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+
+volumes:
+  mmo-db-data:
+  mmo-redis-data:

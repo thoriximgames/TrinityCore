@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "6usJJjKgal0=",
+  "success": true,
+  "projectFilePath": "E:\\GIT\\MMO-Suite\\MMO-Server\\Tests\\ConnectionTester\\ConnectionTester.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Thori\\.nuget\\packages\\google.flatbuffers\\25.2.10\\google.flatbuffers.25.2.10.nupkg.sha512"
+  ],
+  "logs": []
+}
