@@ -36,6 +36,15 @@ add_executable(MMOServer
     src/Engine/Entity.h
     src/Engine/EntityManager.h
     src/Engine/DatabaseManager.h
+    src/Modules/Auth/Handlers/LoginHandler.cpp
+    src/Modules/Auth/Handlers/RegisterHandler.cpp
+    src/Modules/Character/Handlers/CharacterListHandler.cpp
+    src/Modules/Character/Handlers/CreateCharacterHandler.cpp
+    src/Modules/Character/Handlers/DeleteCharacterHandler.cpp
+    src/Modules/Character/Handlers/SelectCharacterHandler.cpp
+    src/Modules/World/Handlers/RealmListHandler.cpp
+    src/Modules/World/Handlers/JoinRealmHandler.cpp
+    src/Modules/World/Handlers/MovementHandler.cpp
 )
 
 # Link dependencies

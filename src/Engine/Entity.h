@@ -24,8 +24,8 @@ public:
         _isDirty = true;
     }
 
-    const Protocol::Vec3& GetPosition() const { 
-        return *reinterpret_cast<const Protocol::Vec3*>(&_position); 
+    Protocol::Vec3 GetPosition() const { 
+        return Protocol::Vec3(_position.x, _position.y, _position.z); 
     }
 
     float GetRotation() const { return _rotation; }

@@ -44,6 +44,15 @@ public:
      */
     void QueuePacket(std::shared_ptr<std::vector<uint8_t>> packetData);
 
+    // Session State (Public for Module Handlers)
+    SessionState _state;
+    bool _authenticated;
+    std::shared_ptr<Engine::Player> _player;
+
+    // For Handoff between Login and World
+    uint64_t _tempAccountId;
+    std::string _tempUsername;
+
 private:
     /**
      * @brief Handles a specific packet type.
@@ -56,13 +65,6 @@ private:
     asio::awaitable<void> WriteLoop();
 
     tcp::socket _socket;
-    SessionState _state;
-    bool _authenticated;
-    std::shared_ptr<Engine::Player> _player;
-
-    // For Handoff between Login and World
-    uint64_t _tempAccountId;
-    std::string _tempUsername;
 
     // Thread-safe write queue
     std::deque<std::shared_ptr<std::vector<uint8_t>>> _writeQueue;

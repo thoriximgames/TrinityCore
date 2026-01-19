@@ -15,3 +15,4 @@ E:\GIT\MMO-Suite\MMO-Server\Tests\ConnectionTester\obj\Debug\net8.0\refint\Conne
 E:\GIT\MMO-Suite\MMO-Server\Tests\ConnectionTester\obj\Debug\net8.0\ConnectionTester.pdb
 E:\GIT\MMO-Suite\MMO-Server\Tests\ConnectionTester\obj\Debug\net8.0\ConnectionTester.genruntimeconfig.cache
 E:\GIT\MMO-Suite\MMO-Server\Tests\ConnectionTester\obj\Debug\net8.0\ref\ConnectionTester.dll
+E:\GIT\MMO-Suite\MMO-Server\Tests\ConnectionTester\obj\Debug\net8.0\ConnectionTester.sourcelink.json

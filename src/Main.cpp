@@ -7,6 +7,9 @@
 #include "Engine/RedisManager.h"
 #include "Engine/EntityManager.h"
 #include "Engine/PersistenceWorker.h"
+#include "Modules/Auth/AuthModule.h"
+#include "Modules/Character/CharacterModule.h"
+#include "Modules/World/WorldModule.h"
 
 // Global pointer for signal handling
 std::unique_ptr<MMO::Host::NetworkHost> gHost = nullptr;
@@ -56,6 +59,11 @@ int main() {
         // Start Engine Threads
         MMO::Engine::EntityManager::Instance().StartPersistenceThread();
         MMO::Engine::PersistenceWorker::Instance().Start();
+
+        // Initialize Modules
+        MMO::Modules::Auth::AuthModule::Initialize();
+        MMO::Modules::Character::CharacterModule::Initialize();
+        MMO::Modules::World::WorldModule::Initialize();
 
         // Initialize the Host
         // Defaulting to 8085 (WoW World Port)
